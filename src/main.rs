@@ -19,7 +19,7 @@ fn main() -> io::Result<()> {
     let mut temp_file = File::create(temp_file_path)?;
 
     let lines = reader.lines();
-    
+
     // Iterate over each line in the file
     for line in lines {
         let line = line?;
@@ -34,14 +34,12 @@ fn main() -> io::Result<()> {
 
             writeln!(temp_file, "{}", replaced_content)?;
 
-            println!("Imported module: {}", imported_module);
         }else{
-            println!("Running {}",line);
             writeln!(temp_file, "{}", line)?;
         }
     }
 
-    fs::rename("hello_tmp.js","hello.js")?;
+    fs::rename(temp_file_path,file_path)?;
 
 
     Ok(())
